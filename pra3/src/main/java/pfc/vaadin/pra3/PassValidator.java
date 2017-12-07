@@ -8,17 +8,11 @@ import com.vaadin.data.ValueContext;
 
 /**
  * Clase que valida las restricciones impuestas al campo contraseña
- * implementando la Interfaz com.vaadin.data.Validator<String>
- * 
- * 
- * 
- * Implementa la interfaz Validator.
+ * implementando la Interfaz com.vaadin.data.Validator<String>.
  * 
  * @author jdelgadot
  * @date 06/12/17
  */
-
-
 @SuppressWarnings("serial")
 public class PassValidator implements Validator<String> {
 
@@ -50,6 +44,7 @@ public class PassValidator implements Validator<String> {
 	 *  Método que debemos implementar de la interfaz Validator.
 	 *  Validamos mediante expresiones regulares las restricciones impuestas a la contraseña
 	 *  según los valores de las propiedades capital, digit y alfa.
+	 *  Además imponemos una longitud superior a size.
 	 *  
 	 *  @param value - caracteres que compone la contraseña a validar
 	 *  @param context - valor del contexto para validar

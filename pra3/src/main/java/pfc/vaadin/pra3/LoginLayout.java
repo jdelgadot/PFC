@@ -10,8 +10,8 @@ import com.vaadin.ui.VerticalLayout;
 
 /**
  * Plantilla que contiene el formulario de entrada a la plataforma.
- * Dispone de los campos usuario y contraseña.
- * Además de un botón que valida la entrada.
+ * Dispone de los campos de usuario y contraseña.
+ * Además de un botón que valida la entrada a la plataforma.
  * 
  * @author jdelgadot
  * @date 02/12/17
@@ -21,18 +21,18 @@ import com.vaadin.ui.VerticalLayout;
 @SuppressWarnings("serial")
 public class LoginLayout extends VerticalLayout {
 
-	// Campos de entrada usuario y contraseña
+	// Campos de entrada usuario y contraseña.
 	protected TextField user = new TextField();
 	protected PasswordField pass = new PasswordField();	
 	
-	// Etiquetas para recoger los errores de validación y formato.
+	// Etiquetas para recoger los errores de validación.
 	protected Label errorUser = new Label();
 	protected Label errorPass = new Label();
 	
-	// Botón de inicio de sesión
+	// Botón de inicio de sesión.
 	protected Button loginButton = new Button();
 	
-	// Nuestra plantilla será un panel que contiene el formulario en formato vertical.
+	// Panel que contiene el formulario en formato vertical.
 	protected Panel panelLogin = new Panel("Acceso a plataforma");
 	protected VerticalLayout content = new VerticalLayout();
 	
@@ -46,11 +46,11 @@ public class LoginLayout extends VerticalLayout {
 		errorUser.setVisible(false);
 		errorPass.setVisible(false);
 		
-		// Configuramos el tamaño del formulario y margen
+		// Configuramos el tamaño del panel y su margen
 		panelLogin.setWidth("400px");;
 		content.setMargin(true);
 		
-		// Añadimos sus componentes
+		// Añadimos los componentes
 		content.addComponents(errorUser, user, errorPass, pass, loginButton);
 		
 		// Insertamos el formulario en el panel
@@ -58,9 +58,9 @@ public class LoginLayout extends VerticalLayout {
 		
 		// Añadimos el panel a la plantilla
 		addComponent(panelLogin);
-		// Alineamos verticalmente
-		setComponentAlignment(panelLogin, Alignment.TOP_CENTER);
 		
+		// Alineamos verticalmente
+		setComponentAlignment(panelLogin, Alignment.TOP_CENTER);	
 	}
 
 	public Label getErrorUser() {
@@ -74,6 +74,4 @@ public class LoginLayout extends VerticalLayout {
 	public Button getLoginButton() {
 		return loginButton;
 	}
-	
-	
 }

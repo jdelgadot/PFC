@@ -1,24 +1,25 @@
 package pfc.vaadin.pra3;
 
+import javax.validation.constraints.NotNull;
+
 /**
- * Modelo de datos que guarda el usuario y contraseña.
+ * Modelo de datos que guarda el usuario y contraseña
+ * de las personas que usan una plataforma.
  * 
  * @author jdelgadot
  * @date 02/12/17
- *
+ * 
  */
 
 public class LoginBean {
 
-	//@NotNull(message = "Introduce tu usuario")
-	//@Size(min = 4, message = "Longitud mínima 4.")
+	@NotNull(message = "Introduce tu usuario")
 	private String user;
 
-	// @NotNull( message = "Introduce tu contraseña")
-	// @Size(min= 2, message = "al menos dos caracteres")
+	@NotNull( message = "Introduce tu contraseña")
 	private String pass;
 
-	// getters y setters de las properties del bean.
+	// getters y setters de las propiedades del bean.
 	public String getUser() {
 		return user;
 	}
