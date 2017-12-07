@@ -46,7 +46,7 @@ public class LoginEditor extends LoginLayout {
 		binder.forField(pass)
 			// Registramos el validador
 			.withValidator(new PassValidator(capital, digit, alfa, size))
-			// Oersonalizamos la salida de errores por defecto
+			// Personalizamos la salida de errores por defecto
 			.withValidationStatusHandler(status -> {
 				errorPass.setVisible(status.isError());
 				errorPass.setValue(status.getMessage().orElse(""));
@@ -58,7 +58,7 @@ public class LoginEditor extends LoginLayout {
 		
 		
 		/**
-		 * Registramos un oyente de cick al botón que da entrada a la plataforma.
+		 * Registramos un oyente de click al botón que da entrada a la plataforma.
 		 * 
 		 */
 		loginButton.addClickListener(e -> {
