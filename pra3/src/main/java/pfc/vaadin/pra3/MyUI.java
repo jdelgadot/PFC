@@ -1,9 +1,16 @@
 package pfc.vaadin.pra3;
 
+import javax.annotation.PostConstruct;
+import javax.inject.Inject;
+
 import com.vaadin.annotations.Theme;
 import com.vaadin.cdi.CDIUI;
+import com.vaadin.cdi.CDIViewProvider;
+import com.vaadin.navigator.Navigator;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.UI;
+
+import pfc.vaadin.pra3.backend.CredentialService;
 
 /**
  * This UI is the application entry point. A UI may either represent a browser window 
@@ -17,12 +24,31 @@ import com.vaadin.ui.UI;
 @CDIUI("")
 public class MyUI extends UI {
 
+	// Proveedor de vista
+	@Inject CDIViewProvider viewProvider;
 	
-	private LoginEditor editor = new LoginEditor(true, true, false, 6);
+	// Clase servicio que gestiona los datos de los usuarios
+	@Inject CredentialService service;	
 	
     @Override
     protected void init(VaadinRequest vaadinRequest) {
-        
-        setContent(editor);
+    	
+    		// Creamos una instancia de navegador. 
+    		Navigator navigator = new Navigator(this, this);
+    		
+    		// Le añadimos un proveedor de vistas
+    		navigator.addProvider(viewProvider);
+    		
+    		// Navegamos hacia la vista login
+    		navigator.navigateTo("login");
+    		
+    }
+    
+    /*
+     * Método que carga los datos tras instanciar la UI
+     */
+    @PostConstruct
+    void init() {
+    		service.loadData();
     }
 }

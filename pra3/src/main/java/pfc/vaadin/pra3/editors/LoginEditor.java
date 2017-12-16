@@ -1,7 +1,13 @@
-package pfc.vaadin.pra3;
+package pfc.vaadin.pra3.editors;
 
 import com.vaadin.data.BeanValidationBinder;
 import com.vaadin.server.UserError;
+
+import pfc.vaadin.pra3.backend.Credential;
+import pfc.vaadin.pra3.backend.CredentialService;
+import pfc.vaadin.pra3.layouts.LoginLayout;
+import pfc.vaadin.pra3.validators.PassValidator;
+import pfc.vaadin.pra3.validators.UserValidator;
 
 /**
  * Clase que permite editar la interfaz de entrada a la plataforma.
@@ -14,7 +20,8 @@ import com.vaadin.server.UserError;
 public class LoginEditor extends LoginLayout {
 
 	// clase que vincula el modelo de datos con el formulario de entrada.
-	private BeanValidationBinder<LoginBean> binder = new BeanValidationBinder<>(LoginBean.class);
+	private BeanValidationBinder<Credential> binder = new BeanValidationBinder<>(Credential.class);
+	
 	
 	
 	/**
@@ -28,19 +35,21 @@ public class LoginEditor extends LoginLayout {
 	 * @param alfa - false si exige carácter no alfanumérico en contraseña y al menos [-_@.] en usuario.
 	 * @param size - tamaño mínimo de usuario y contraseña.
 	 */
-	public LoginEditor(boolean capital, boolean digit, boolean alfa, int size) {
+	public LoginEditor(boolean capital, boolean digit, boolean alfa, int size, CredentialService service) {
 		
 		// Vinculación del campo de texto user con la propiedad user del modelo de datos .
 		binder.forField(user)
 			// Registramos el validador
 			.withValidator(new UserValidator(alfa, size))
+			//.withStatusLabel(errorUser)
+			.withNullRepresentation("")
 			// Personalizamos la salida de errores
 			.withValidationStatusHandler(status -> {
 				errorUser.setVisible(status.isError());
 				errorUser.setValue(status.getMessage().orElse(""));
 				user.setComponentError(status.isError()? new UserError(""): null);
 			})
-			.bind(LoginBean::getUser, LoginBean::setUser);
+			.bind("user");
 		
 		// Vinculación del campo de contraseña pass con la propiedad pass del modelo de datos. 
 		binder.forField(pass)
@@ -52,29 +61,40 @@ public class LoginEditor extends LoginLayout {
 				errorPass.setValue(status.getMessage().orElse(""));
 				pass.setComponentError(status.isError()? new UserError(""): null);
 			})
-			.bind(LoginBean::getPass, LoginBean::setPass);
+			.bind("pass");
 			
 		binder.bindInstanceFields(this);
-		
 		
 		/**
 		 * Registramos un oyente de click al botón que da entrada a la plataforma.
 		 * 
 		 */
 		loginButton.addClickListener(e -> {
-			if(binder.validate().isOk()) {
-				boolean valido = (user.getValue().equals("j_delgadot") &&  pass.getValue().equals("j$1A56"));
+			if(binder.validate().isOk()) {	
+				//En este punto service es null LoginLayout debe ser manejado por CDI
+				boolean valido = service.isValid(user.getValue(), pass.getValue());
 				if(!valido) {
 					errorUser.setVisible(true);
-					errorUser.setValue("Usuario o contraseña no válidos");
+					errorUser.setValue("Usuario o ocntraseña no válida");
 				} else {
 					errorUser.setVisible(false);
 					errorUser.setValue("");
 				}
 			}
 		});
+		
+		
 
 	}
+
+
+
+	public BeanValidationBinder<Credential> getBinder() {
+		return binder;
+	}
+
+
+	
 	
 	
 }

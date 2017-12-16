@@ -1,4 +1,4 @@
-package pfc.vaadin.pra3;
+package pfc.vaadin.pra3.validators;
 
 import java.util.regex.Pattern;
 
