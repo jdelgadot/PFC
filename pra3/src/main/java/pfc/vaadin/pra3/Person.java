@@ -14,7 +14,7 @@ public class Person {
 	String surname;
 	
 	@NotNull(message = "Introduce tu email")
-	@Pattern(regexp= ".+@.+\\.[a-z]", message = "email no válida")
+	@Pattern(regexp= ".+@.+\\.[a-z] {3}", message = "email no válida")
 	String email;
 	
 	@NotNull(message ="Introduce contraseña")
