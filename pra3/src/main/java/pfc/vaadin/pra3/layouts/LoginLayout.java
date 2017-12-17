@@ -53,6 +53,9 @@ public class LoginLayout extends VerticalLayout {
 		errorUser.setVisible(false);
 		errorPass.setVisible(false);
 		
+		// Desactivamos el botón de entrada
+		loginButton.setEnabled(false);
+		
 		//Expandimos los componentes
 		user.setWidth("100%");
 		pass.setWidth("100%");

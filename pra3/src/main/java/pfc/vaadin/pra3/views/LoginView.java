@@ -4,6 +4,7 @@ import javax.inject.Inject;
 
 import com.vaadin.cdi.CDIView;
 import com.vaadin.navigator.View;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.VerticalLayout;
 
 import pfc.vaadin.pra3.backend.CredentialService;
@@ -36,9 +37,11 @@ public class LoginView extends VerticalLayout implements View {
 				if(!valido) {
 					editor.getErrorUser().setVisible(true);
 					editor.getErrorUser().setValue("Usuario o contraseña no válida");
+					editor.getLoginButton().setEnabled(false);
 				} else {
 					editor.getErrorUser().setVisible(false);
 					editor.getErrorUser().setValue("");
+					Notification.show("Usuario validado");
 				}
 			}
 		});

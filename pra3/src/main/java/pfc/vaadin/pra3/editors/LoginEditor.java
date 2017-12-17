@@ -67,7 +67,10 @@ public class LoginEditor extends LoginLayout {
 			
 		binder.bindInstanceFields(this);
 		
-		
+		// Desactivamos el botón de entrada si los campos de usuario y contraseña cumplen las restricciones.
+		binder.addStatusChangeListener(e ->{
+			loginButton.setEnabled(e.getBinder().isValid());
+		});
 		
 		
 
