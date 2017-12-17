@@ -1,5 +1,7 @@
 package pfc.vaadin.pra3.editors;
 
+import javax.inject.Inject;
+
 import com.vaadin.data.BeanValidationBinder;
 import com.vaadin.server.UserError;
 
@@ -22,7 +24,7 @@ public class LoginEditor extends LoginLayout {
 	// clase que vincula el modelo de datos con el formulario de entrada.
 	private BeanValidationBinder<Credential> binder = new BeanValidationBinder<>(Credential.class);
 	
-	
+	@Inject CredentialService service;
 	
 	/**
 	 * Constructor de la clase.
@@ -35,7 +37,7 @@ public class LoginEditor extends LoginLayout {
 	 * @param alfa - false si exige carácter no alfanumérico en contraseña y al menos [-_@.] en usuario.
 	 * @param size - tamaño mínimo de usuario y contraseña.
 	 */
-	public LoginEditor(boolean capital, boolean digit, boolean alfa, int size, CredentialService service) {
+	public LoginEditor(boolean capital, boolean digit, boolean alfa, int size) {
 		
 		// Vinculación del campo de texto user con la propiedad user del modelo de datos .
 		binder.forField(user)
@@ -65,29 +67,18 @@ public class LoginEditor extends LoginLayout {
 			
 		binder.bindInstanceFields(this);
 		
-		/**
-		 * Registramos un oyente de click al botón que da entrada a la plataforma.
-		 * 
-		 */
-		loginButton.addClickListener(e -> {
-			if(binder.validate().isOk()) {	
-				//En este punto service es null LoginLayout debe ser manejado por CDI
-				boolean valido = service.isValid(user.getValue(), pass.getValue());
-				if(!valido) {
-					errorUser.setVisible(true);
-					errorUser.setValue("Usuario o ocntraseña no válida");
-				} else {
-					errorUser.setVisible(false);
-					errorUser.setValue("");
-				}
-			}
-		});
+		
 		
 		
 
 	}
+		
+	
 
-
+	
+	
+	
+	
 
 	public BeanValidationBinder<Credential> getBinder() {
 		return binder;
