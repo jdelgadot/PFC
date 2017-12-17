@@ -84,8 +84,28 @@ public class LoginLayout extends VerticalLayout {
 		return createAccount;
 	}
 
+	
+	public Button getLoginButton() {
+		return loginButton;
+	}
 
 	
+	public Label getErrorUser() {
+		return errorUser;
+	}
+	
+	public Label getErrorPass() {
+		return errorPass;
+	}
+	
+	
+	public TextField getUser() {
+		return user;
+	}
+	
+	public PasswordField getPass() {
+		return pass;
+	}
 
 	
 
