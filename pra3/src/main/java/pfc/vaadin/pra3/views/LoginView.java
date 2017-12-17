@@ -35,7 +35,7 @@ public class LoginView extends VerticalLayout implements View {
 				boolean valido = service.isValid(editor.getUser().getValue(), editor.getPass().getValue());
 				if(!valido) {
 					editor.getErrorUser().setVisible(true);
-					editor.getErrorUser().setValue("Usuario o ocntraseña no válida");
+					editor.getErrorUser().setValue("Usuario o contraseña no válida");
 				} else {
 					editor.getErrorUser().setVisible(false);
 					editor.getErrorUser().setValue("");
