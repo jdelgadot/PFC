@@ -2,6 +2,8 @@ package pfc.vaadin.pra3.backend;
 
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 /**
  * Entidad que representa las credenciales (usuario y contraseña) de la 
@@ -15,13 +17,12 @@ import javax.validation.constraints.NotNull;
 @SuppressWarnings("serial")
 @Entity
 public class Credential extends AbstractEntity {
-
+	
 	@NotNull(message = "Introduce un usuario")
 	private String user;
 	
 	@NotNull(message = "Introduce una contraseña")
 	private String pass;
-	
 	
 	public Credential() {
 	}
