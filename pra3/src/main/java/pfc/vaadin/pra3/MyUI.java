@@ -6,10 +6,9 @@ import javax.inject.Inject;
 import com.vaadin.annotations.Theme;
 import com.vaadin.cdi.CDIUI;
 import com.vaadin.cdi.CDIViewProvider;
+import com.vaadin.navigator.Navigator;
 import com.vaadin.server.VaadinRequest;
-import com.vaadin.ui.Label;
 import com.vaadin.ui.UI;
-import com.vaadin.ui.VerticalLayout;
 
 import pfc.vaadin.pra3.backend.PersonService;
 
@@ -35,11 +34,7 @@ public class MyUI extends UI {
     @Override
     protected void init(VaadinRequest vaadinRequest) {
     	
-    		VerticalLayout content = new VerticalLayout();
-    		Label label = new Label("HOLA");
-    		content.addComponent(label);
-    		setContent(content);
-    	/**
+    		
     	
     		// Creamos una instancia de navegador. 
     		Navigator navigator = new Navigator(this, this);
@@ -49,7 +44,7 @@ public class MyUI extends UI {
     		
     		// Navegamos hacia la vista login
     		navigator.navigateTo("login");
-    	**/
+    
     	
     	
     }
