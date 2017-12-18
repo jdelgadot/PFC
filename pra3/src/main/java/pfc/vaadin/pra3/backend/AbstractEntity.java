@@ -8,8 +8,10 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
 
-
-@SuppressWarnings("serial")
+/**
+ *
+ * @author Matti Tahvonen
+ */
 @MappedSuperclass
 public abstract class AbstractEntity implements Serializable, Cloneable {
 

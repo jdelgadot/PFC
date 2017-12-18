@@ -1,9 +1,12 @@
 package pfc.vaadin.pra3.editors;
 
 import com.vaadin.data.BeanValidationBinder;
+import com.vaadin.data.BindingValidationStatus;
 import com.vaadin.server.UserError;
+import com.vaadin.ui.AbstractTextField;
+import com.vaadin.ui.Label;
 
-import pfc.vaadin.pra3.Person;
+import pfc.vaadin.pra3.backend.Person;
 import pfc.vaadin.pra3.layouts.RegisterLayout;
 
 @SuppressWarnings("serial")
@@ -15,35 +18,32 @@ public class RegisterEditor extends RegisterLayout {
 		
 		binder.forField(name)
 		.withValidationStatusHandler(status ->{
-			nameStatus.setValue(status.getMessage().orElse(""));
-			nameStatus.setVisible(status.isError());
-			nameStatus.setComponentError(status.isError()? new UserError("") : null);
+			setStatus(status, nameStatus, name);
 		})
 		.bind("name");
 		
 		binder.forField(surname)
 		.withValidationStatusHandler(status ->{
-			surnameStatus.setValue(status.getMessage().orElse(""));
-			surnameStatus.setVisible(status.isError());
-			surnameStatus.setComponentError(status.isError()? new UserError("") : null);
+			setStatus(status, surnameStatus, surname);
 		})
 		.withNullRepresentation("")
 		.bind("surname");
 		
 		binder.forField(email)
 		.withValidationStatusHandler(status ->{
-			emailStatus.setValue(status.getMessage().orElse(""));
-			emailStatus.setVisible(status.isError());
-			emailStatus.setComponentError(status.isError()? new UserError("") : null);
+			setStatus(status, emailStatus, email);
 		})
 		.bind("email");
 		
+		binder.forField(user)
+		.withValidationStatusHandler(status ->{
+			setStatus(status, userStatus, user);
+		})
+		.bind("user");
 		
 		binder.forField(pass)
 		.withValidationStatusHandler(status ->{
-			passStatus.setValue(status.getMessage().orElse(""));
-			passStatus.setVisible(status.isError());
-			passStatus.setComponentError(status.isError()? new UserError("") : null);
+			setStatus(status, passStatus, pass);
 		})
 		.bind("pass");
 		
@@ -71,6 +71,25 @@ public class RegisterEditor extends RegisterLayout {
 			});
 		*/
 	}
+
+	
+	/**
+	 * Método que establece un comportamiento personalizado ante la validación de un campo.
+	 * En caso de error:
+	 *       Hace visible una etiqueta con el error se validación justo encima del campo.
+	 *       Deja el campo con el indicador por defecto de error (borde rojo y signo !).
+	 * 
+	 * @param status - estado de la validación de un campo.
+	 * @param label - Etiqueta que contendrá el mensaje de error asociado a la validación del campo.
+	 * @param field - Campo a validar 
+	 */
+	private void setStatus(BindingValidationStatus<?> status, Label label, AbstractTextField field) {
+		label.setValue(status.getMessage().orElse(""));
+		label.setVisible(status.isError());
+		field.setComponentError(status.isError()? new UserError("") : null);
+	}
+	
+	
 	
 	
 

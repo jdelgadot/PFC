@@ -7,7 +7,7 @@ import com.vaadin.navigator.View;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.VerticalLayout;
 
-import pfc.vaadin.pra3.backend.CredentialService;
+import pfc.vaadin.pra3.backend.PersonService;
 import pfc.vaadin.pra3.editors.LoginEditor;
 
 @SuppressWarnings("serial")
@@ -15,7 +15,8 @@ import pfc.vaadin.pra3.editors.LoginEditor;
 public class LoginView extends VerticalLayout implements View {
 
 	
-	@Inject CredentialService service;
+	//@Inject CredentialService service;
+	@Inject PersonService service;
 	
 	private LoginEditor editor = new LoginEditor(true, true, false, 4);
 	

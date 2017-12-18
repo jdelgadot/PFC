@@ -17,9 +17,10 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class PersonService {
-@Inject PersonRepository repo;
 	
-	@PersistenceContext(unitName="credentialsdb")
+	@Inject PersonRepository repo;
+	
+	@PersistenceContext(unitName="personsdb")
 	EntityManager em;
 	
 	
@@ -47,7 +48,7 @@ public class PersonService {
 	
 	public void loadData() {
 		for(int i= 0; i < names.length; i++) {
-			final Person person = new Person(names[i], surnames[i], names[i] + "@gmail,com", "_"+names[i], "Pass$" + i);
+			final Person person = new Person(names[i], surnames[i], names[i] + "@gmail.com", "_"+names[i], "Pass$" + i);
 			em.persist(person);
 			em.flush();
 		}

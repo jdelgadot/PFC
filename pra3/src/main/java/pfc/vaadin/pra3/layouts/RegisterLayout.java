@@ -24,12 +24,14 @@ public class RegisterLayout extends VerticalLayout {
 	protected TextField name = new TextField();
 	protected TextField surname = new TextField();
 	protected TextField email = new TextField();
+	protected TextField user = new TextField();
 	protected PasswordField pass = new PasswordField();
 	
 	// Etiquetas de errores de validación
 	protected Label nameStatus = new Label();
 	protected Label surnameStatus = new Label();
 	protected Label emailStatus = new Label();
+	protected Label userStatus = new Label();
 	protected Label passStatus = new Label();
 	
 	// Botón de creación de cuenta
@@ -58,7 +60,7 @@ public class RegisterLayout extends VerticalLayout {
 		expandComponents();
 		
 		
-		content.addComponents(nameStatus, name, surnameStatus, surname, emailStatus, email, passStatus, pass, createAccount);
+		content.addComponents(nameStatus, name, surnameStatus, surname, emailStatus, email, passStatus, userStatus, user, passStatus, pass, createAccount);
 		panelRegister.setContent(content);
 		
 		//Añadimos el panel a la plantilla
@@ -77,10 +79,12 @@ public class RegisterLayout extends VerticalLayout {
 		name.setWidth("100%");
 		surname.setWidth("100%");
 		surnameStatus.setWidth("100%");
-		email.setWidth("100%");
 		emailStatus.setWidth("100%");
-		pass.setWidth("100%");
+		email.setWidth("100%");
+		userStatus.setWidth("100%");
+		user.setWidth("100%");
 		passStatus.setWidth("100%");
+		pass.setWidth("100%");
 	}
 
 	/**
@@ -90,6 +94,7 @@ public class RegisterLayout extends VerticalLayout {
 		name.setPlaceholder("Nombre");
 		surname.setPlaceholder("Apellidos");
 		email.setPlaceholder("Correo electrónico");
+		user.setPlaceholder("Usuario");
 		pass.setPlaceholder("Contraseña");
 	}
 	/**
@@ -99,6 +104,7 @@ public class RegisterLayout extends VerticalLayout {
 		nameStatus.setVisible(false);
 		surnameStatus.setVisible(false);
 		emailStatus.setVisible(false);
+		userStatus.setVisible(false);
 		passStatus.setVisible(false);
 	}
 	

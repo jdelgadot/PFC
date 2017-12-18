@@ -16,7 +16,7 @@ public class EntityManagerProducer {
 
 	@Produces
 	@Dependent
-	@PersistenceContext(unitName="credentialsdb")
+	@PersistenceContext(unitName="personsdb")
 	public EntityManager entityManager;
 
 }
