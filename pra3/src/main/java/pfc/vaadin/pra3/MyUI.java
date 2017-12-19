@@ -52,8 +52,10 @@ public class MyUI extends UI {
     /*
      * Método que carga los datos tras instanciar la UI
      */
+  
     @PostConstruct
     void init() {
     		service.loadData();
     }
+    
 }

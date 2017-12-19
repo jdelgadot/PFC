@@ -33,9 +33,8 @@ public class LoginView extends VerticalLayout implements View {
 		 */
 		editor.getLoginButton().addClickListener(e -> {
 			if(editor.getBinder().validate().isOk()) {	
-				//En este punto service es null LoginLayout debe ser manejado por CDI
-				boolean valido = service.isValid(editor.getUser().getValue(), editor.getPass().getValue());
-				if(!valido) {
+				boolean registrado = service.isValid(editor.getUser().getValue(), editor.getPass().getValue());
+				if(!registrado) {
 					editor.getErrorUser().setVisible(true);
 					editor.getErrorUser().setValue("Usuario o contraseña no válida");
 					editor.getLoginButton().setEnabled(false);

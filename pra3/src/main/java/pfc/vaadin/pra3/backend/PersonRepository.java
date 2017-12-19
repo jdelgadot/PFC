@@ -14,5 +14,7 @@ import org.apache.deltaspike.data.api.Repository;
 @Repository
 public interface PersonRepository extends EntityRepository<Person, Long> {
 	
-	public List<Person> findByUserAndPass(String filter, String pass);
+	
+	public List<Person> findByUser(String user);
+	public List<Person> findByUserAndPass(String user, String pass);
 }

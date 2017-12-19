@@ -8,13 +8,35 @@ import com.vaadin.ui.Label;
 
 import pfc.vaadin.pra3.backend.Person;
 import pfc.vaadin.pra3.layouts.RegisterLayout;
+import pfc.vaadin.pra3.validators.PassValidator;
+import pfc.vaadin.pra3.validators.UserValidator;
+
+/**
+ * Clase que permite editar la interfaz de registro de una nueva cuenta.
+ * 
+ * @author jdelgadot
+ * @date 12/12/17
+ * 
+ */
 
 @SuppressWarnings("serial")
 public class RegisterEditor extends RegisterLayout {
 
+	// clase que vincula el modelo de datos con el formulario de entrada.
 	private BeanValidationBinder<Person> binder = new BeanValidationBinder<>(Person.class);
 
-	public RegisterEditor() {
+	/**
+	 * Constructor de la clase.
+	 * Vincula el formulario de registro al modelo de datos.
+	 * Registra los validadores de usuario y contraseña y personaliza los errores de validación,
+	 * mostrándolos las etiquetas del formulario.
+	 * 
+	 * @param capital - true si exigimos al menos una mayúscula en la contraseña.
+	 * @param digit - true si exige al menos un dígito en contraseña.
+	 * @param alfa - false si exige carácter no alfanumérico en contraseña y al menos [-_@.] en usuario.
+	 * @param size - tamaño mínimo de usuario y contraseña.
+	 */
+	public RegisterEditor(boolean capital, boolean digit, boolean alfa, int size) {
 		
 		binder.forField(name)
 		.withValidationStatusHandler(status ->{
@@ -36,12 +58,14 @@ public class RegisterEditor extends RegisterLayout {
 		.bind("email");
 		
 		binder.forField(user)
+		.withValidator(new UserValidator(alfa, size))
 		.withValidationStatusHandler(status ->{
 			setStatus(status, userStatus, user);
 		})
 		.bind("user");
 		
 		binder.forField(pass)
+		.withValidator(new PassValidator(capital, digit, alfa, size))
 		.withValidationStatusHandler(status ->{
 			setStatus(status, passStatus, pass);
 		})
@@ -52,24 +76,9 @@ public class RegisterEditor extends RegisterLayout {
 		
 		binder.addStatusChangeListener(e->{
 			boolean isValid = e.getBinder().isValid();
-			createAccount.setEnabled(isValid);
+			createAccountButton.setEnabled(isValid);
 		});
 	
-		
-		/**
-		binder.setValidationStatusHandler(status -> {
-		
-			
-			
-			List<BindingValidationStatus<?>> fieldValidationErrors = status.getFieldValidationErrors();
-			for(BindingValidationStatus<?> fieldValidationError : fieldValidationErrors) {
-				String message = fieldValidationError.getMessage().get();
-				HasValue<?> field = fieldValidationError.getField();
-			}
-				// TODO Poner el mensaje de error en la etiqueta del campo correspondiente 
-				 * Intentar con el getComponentIndex para alcanzar el label
-			});
-		*/
 	}
 
 	
@@ -87,6 +96,11 @@ public class RegisterEditor extends RegisterLayout {
 		label.setValue(status.getMessage().orElse(""));
 		label.setVisible(status.isError());
 		field.setComponentError(status.isError()? new UserError("") : null);
+	}
+
+
+	public BeanValidationBinder<Person> getBinder() {
+		return binder;
 	}
 	
 	

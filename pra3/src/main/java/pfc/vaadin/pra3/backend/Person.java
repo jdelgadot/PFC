@@ -1,8 +1,8 @@
 package pfc.vaadin.pra3.backend;
 
 import javax.persistence.Entity;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 
@@ -18,7 +18,8 @@ public class Person extends AbstractEntity {
 	String surname;
 	
 	@NotNull(message = "Introduce tu email")
-	@Email(message = "email no válido")
+	//@Pattern(regexp=".*@.*\\.[a-z] {3}", message="Introduce un email válido")
+	//@Email(message = "email no válido")
 	String email;
 	
 	@NotNull(message = "Introduce un usuario")

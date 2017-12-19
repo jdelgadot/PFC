@@ -3,11 +3,13 @@ package pfc.vaadin.pra3.layouts;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.FormLayout;
+import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
+
 /**
  * Clase que genera la plantilla de registro para crear una cuenta nueva
  * 
@@ -16,8 +18,7 @@ import com.vaadin.ui.VerticalLayout;
  */
 @SuppressWarnings("serial")
 public class RegisterLayout extends VerticalLayout {
-	
-	
+
 	protected FormLayout formRegister = new FormLayout();
 
 	// Campos del formulario
@@ -26,51 +27,56 @@ public class RegisterLayout extends VerticalLayout {
 	protected TextField email = new TextField();
 	protected TextField user = new TextField();
 	protected PasswordField pass = new PasswordField();
-	
+
 	// Etiquetas de errores de validación
 	protected Label nameStatus = new Label();
 	protected Label surnameStatus = new Label();
 	protected Label emailStatus = new Label();
 	protected Label userStatus = new Label();
 	protected Label passStatus = new Label();
-	
+
 	// Botón de creación de cuenta
-	protected Button createAccount = new Button("Crear Cuenta");
-	
+	protected Button createAccountButton = new Button("Crear Cuenta");
+
+	// Botón de vuelta a entrada plataforma
+	protected Button backLoginButton = new Button("Volver Acceder");
+
 	// Panel que contiene el formulario de registro.
-	protected Panel panelRegister= new Panel("Formulario de registro.");
+	protected Panel panelRegister = new Panel("Formulario de registro.");
 	// Contenido del panel
 	protected VerticalLayout content = new VerticalLayout();
-		
-	
+	// Layout de los botones
+	protected HorizontalLayout buttons = new HorizontalLayout();
+
 	public RegisterLayout() {
 		// Indicamos una referencia textual a los campos
 		setPlaceholder();
-		
+
 		// Dejamos invisibles las etiquetas de errores
 		setNotVisible();
-		
+
 		// No activamos el botón de creación de cuenta
-		createAccount.setEnabled(false);
-		
+		createAccountButton.setEnabled(false);
+
 		// Configuramos el tamaño del panel
 		panelRegister.setWidth("400px");
-		
+
 		// Expandimos los componentes del formulario
 		expandComponents();
-		
-		
-		content.addComponents(nameStatus, name, surnameStatus, surname, emailStatus, email, passStatus, userStatus, user, passStatus, pass, createAccount);
+
+		// Añadimos los botones
+		buttons.addComponentsAndExpand(createAccountButton, backLoginButton);
+
+		content.addComponents(nameStatus, name, surnameStatus, surname, emailStatus, email, passStatus, userStatus,
+				user, passStatus, pass, buttons);
 		panelRegister.setContent(content);
-		
-		//Añadimos el panel a la plantilla
+
+		// Añadimos el panel a la plantilla
 		addComponent(panelRegister);
 		setComponentAlignment(panelRegister, Alignment.TOP_CENTER);
-		
-		
-		
+
 	}
-	
+
 	/**
 	 * Método que expande los campos del formulario para que ocupen todo el ancho.
 	 */
@@ -97,6 +103,7 @@ public class RegisterLayout extends VerticalLayout {
 		user.setPlaceholder("Usuario");
 		pass.setPlaceholder("Contraseña");
 	}
+
 	/**
 	 * Método que deja invisibles las etiquetas de errores de validación
 	 */
@@ -107,6 +114,37 @@ public class RegisterLayout extends VerticalLayout {
 		userStatus.setVisible(false);
 		passStatus.setVisible(false);
 	}
-	
+
+	public Button getCreateAccountButton() {
+		return createAccountButton;
+	}
+
+	public Button getBackLoginButton() {
+		return backLoginButton;
+	}
+
+	public TextField getUser() {
+		return user;
+	}
+
+	public TextField getName() {
+		return name;
+	}
+
+	public TextField getSurname() {
+		return surname;
+	}
+
+	public TextField getEmail() {
+		return email;
+	}
+
+	public PasswordField getPass() {
+		return pass;
+	}
+
+	public void setSurname(TextField surname) {
+		this.surname = surname;
+	}
 
 }

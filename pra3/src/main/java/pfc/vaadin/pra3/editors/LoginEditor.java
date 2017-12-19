@@ -25,10 +25,8 @@ import pfc.vaadin.pra3.validators.UserValidator;
 public class LoginEditor extends LoginLayout {
 
 	// clase que vincula el modelo de datos con el formulario de entrada.
-	// private BeanValidationBinder<Credential> binder = new BeanValidationBinder<>(Credential.class);
 	private BeanValidationBinder<Person> binder = new BeanValidationBinder<>(Person.class);
 	
-	//@Inject CredentialService service;
 	@Inject PersonService service;
 	
 	/**

@@ -28,7 +28,7 @@ public class PersonService {
 	}
 	
 	/**
-	 * Método para saber si un usuario está o no registrado en la plataforma.
+	 * Método para saber si el usuario y contraseñas dadas son válidas.
 	 * 
 	 * @param user - Nombre de usuario
 	 * @param pass - Contraseña del usuario
@@ -37,7 +37,23 @@ public class PersonService {
 	public boolean isValid(String user, String pass) {
 		List<Person> person = repo.findByUserAndPass(user, pass);
 		return person.isEmpty()? false: true;	
-		}
+	}
+	
+	/**
+	 * Método para saber si el nombre de usuario ya está registrado.
+	 * 
+	 * @param user - nombre de usuario a buscar en la bases de datso
+	 * @return true - si el usuario está en la base de datos.
+	 */
+	public boolean isRegistered(String user) {
+		List<Person> person = repo.findByUser(user);
+		return person.isEmpty()? false: true;
+	}
+	
+	public void createAccount(Person person) {
+		em.persist(person);
+		em.flush();
+	}
 	
 	
 	/**
